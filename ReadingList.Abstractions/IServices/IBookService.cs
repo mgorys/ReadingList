@@ -20,6 +20,6 @@ namespace ReadingList.Abstractions.IServices
         Task<ServerResponse<BookDto>> DeleteBookAsync(string name);
         Task<ServerResponse<BookDto>> ChangeBookFinishedAsync(string name, bool finished);
         Task<ServerResponse<BookDto>> UpdateBookImageAsync(string name, string updateImageUrl);
-        Task<ServerResponse<BookDto>> ChangeBookPriorityAsync(string name, int newPriority);
+        Task<ServerResponse<BookDto>> MoveBookPriorityAsync(string name, string move);
     }
 }

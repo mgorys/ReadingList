@@ -30,13 +30,6 @@ namespace ReadingList.Services
                 throw new NotFoundException("Sorry, books have been not found");
             resultDto.DataFromServer = _mapper.Map<IEnumerable<BookDto>>(result.DataFromServer);
             resultDto.Success = result.Success;
-            // key number for React
-            int i = 0;
-            foreach (var item in resultDto.DataFromServer)
-            {
-                item.OrderNumber = i;
-                i++;
-            }
             return resultDto;
         }
 
@@ -86,11 +79,19 @@ namespace ReadingList.Services
             resultDto.Success = result.Success;
             return resultDto;
         }
-        public async Task<ServerResponse<BookDto>> ChangeBookPriorityAsync(string name, int newPriority)
+       
+        public async Task<ServerResponse<BookDto>> MoveBookPriorityAsync(string name, string move)
         {
             var resultDto = new ServerResponse<BookDto>();
-            Priority priorityVaule = (Priority)newPriority;
-            var result = await _bookRepository.ChangeBookPriorityAsync(name, priorityVaule);
+            var result = new ServerResponse<Book>();
+            if (move == "up")
+                result = await _bookRepository.MoveUpBookPriorityAsync(name);
+            else if (move == "down")
+                result = await _bookRepository.MoveDownBookPriorityAsync(name);
+            else
+                throw new BadRequestException("Incorrect value off change");
+
+
             if (result.Success == false)
                 throw new NotFoundException("Sorry, book with that name has been not found");
             resultDto.Success = result.Success;

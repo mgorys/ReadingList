@@ -3,52 +3,39 @@ import { useNavigate, useParams } from 'react-router-dom'
 import useFetch from './useFetch';
 import { useState , useEffect } from 'react';
 
+const urlServer = 'https://localhost:7138/api/';
 const defaultImg = 
 'https://demo.publishr.cloud/assets/common/images/edition_placeholder.png'
   const BookDetails = () => {
   const [finished, setFinished] = useState(false);
   const [updateImg, setUpdateImg] = useState(false);
-  const [priority, setPriority] =useState(false);
   const { name } = useParams();
   const { data : bookDetails , error , isPending } = 
-      useFetch('https://localhost:7138/api/GetBookBy/'+ name);
+      useFetch(urlServer +'GetBookBy/'+ name);
 
 
     useEffect(() => {
       if(bookDetails.dataFromServer !== undefined && !isPending)
       {
         document.getElementById("checkboxFinished").checked = bookDetails.dataFromServer.finished;
-        document.getElementById("dropdownPriority").value = bookDetails.dataFromServer.priority;
       }
   },[]);
 
-  const handleDropdownPriority = (e)=>{
-    setPriority(e.target.value)
-    handleChangeDropdownPriority()
-  }
   const handleTick = (e)=>{
     setFinished(e.target.checked)
     handleChangeFinished()
   }
-  const handleUpdateImg = () =>{
+  const handleUpdateImg = async () =>{
     const updateImgValue = document.getElementById("inputUpdateImg").value;
-    fetch('https://localhost:7138/api/UpdateBookImg/'+ name,{
+    await fetch(urlServer+'UpdateBookImg/'+ name,{
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
       body:JSON.stringify(updateImgValue)
     })
   }
-  const handleChangeDropdownPriority =()=>{
-    const dropdownPriority = document.getElementById("dropdownPriority").value;
-    fetch('https://localhost:7138/api/ChangeBookPriority/'+ name,{
-      method: 'PUT',
-      headers: { "Content-Type": "application/json" },
-      body:JSON.stringify(dropdownPriority)
-    })
-  }
-  const handleChangeFinished =()=>{
+  const handleChangeFinished =async ()=>{
     const checkboxFinished = document.getElementById("checkboxFinished").checked;
-    fetch('https://localhost:7138/api/ChangeBookFinished/'+ name,{
+    await fetch(urlServer+'ChangeBookFinished/'+ name,{
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
       body:JSON.stringify(checkboxFinished)
@@ -56,7 +43,7 @@ const defaultImg =
   }
   const navigate = useNavigate();
   const handleDelete =() =>{
-    fetch('https://localhost:7138/api/DeleteBook/'+ name,{
+    fetch(urlServer+'DeleteBook/'+ name,{
       method: 'DELETE'
     }).then (()=>{
       navigate("/");
@@ -78,14 +65,6 @@ const defaultImg =
                   onChange={(e) => handleTick(e)}
                 ></input>
               </h2>
-              <h2>Priority:  
-                <select type="number" id="dropdownPriority"
-                  value={priority}
-                  onChange={(e) => handleDropdownPriority(e)}>
-                  <option value="0">For Now</option>
-                  <option value="1">Maybe</option>
-                  <option value="2">Later</option>
-                </select></h2>
               <h2>{ bookDetails.dataFromServer.name }</h2>
               <img 
                 src={bookDetails.dataFromServer.imgUrl ? bookDetails.dataFromServer.imgUrl : defaultImg} 

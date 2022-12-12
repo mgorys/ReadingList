@@ -6,9 +6,9 @@ const useFetch =(url) =>{
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
 
-      useEffect(() => {
+      useEffect(async () => {
         const abortCont = new AbortController();
-            fetch(url, {signal:abortCont.signal})
+            await fetch(url, {signal:abortCont.signal})
             .then(res =>{
                 if(!res.ok){
                     throw Error('could not fetch the data for that resource');

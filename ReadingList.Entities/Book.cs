@@ -14,6 +14,7 @@ namespace ReadingList.Entities
         public string Name { get; set; }
         public bool Finished { get; set; }
         public Priority Priority { get; set; }
+        public int PriorityNumber { get; set; }
         public string? ImgUrl { get; set; }
     }
 }

@@ -58,10 +58,10 @@ namespace ReadingList.Api.Controllers
             await _bookService.UpdateBookImageAsync(name, updateImageUrl);
             return StatusCode(201);
         }
-        [HttpPut("ChangeBookPriority/{name}")]
-        public async Task<ActionResult> ChangeBookPriorityAsync([FromRoute] string name, [FromBody] int newPriority)
+        [HttpPut("MoveBookPriority/{name}")]
+        public async Task<ActionResult> MoveBookPriorityAsync([FromRoute] string name, [FromBody] string move)
         {
-            await _bookService.ChangeBookPriorityAsync(name, newPriority);
+            await _bookService.MoveBookPriorityAsync(name, move);
             return StatusCode(201);
         }
     }

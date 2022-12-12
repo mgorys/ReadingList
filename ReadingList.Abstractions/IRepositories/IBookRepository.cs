@@ -14,6 +14,7 @@ namespace ReadingList.Abstractions.IRepositories
         Task<ServerResponse<Book>> DeleteBookAsync(string name);
         Task<ServerResponse<Book>> ChangeBookFinishedAsync(string name, bool finished);
         Task<ServerResponse<Book>> UpdateBookImageAsync(string name, string updateImageUrl);
-        Task<ServerResponse<Book>> ChangeBookPriorityAsync(string name, Priority newPriority);
+        Task<ServerResponse<Book>> MoveUpBookPriorityAsync(string name);
+        Task<ServerResponse<Book>> MoveDownBookPriorityAsync(string name);
     }
 }

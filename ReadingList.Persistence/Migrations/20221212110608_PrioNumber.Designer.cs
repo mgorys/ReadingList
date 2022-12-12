@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadingList.Persistence;
 
@@ -10,9 +11,11 @@ using ReadingList.Persistence;
 namespace ReadingList.Persistence.Migrations
 {
     [DbContext(typeof(ReadingListDbContext))]
-    partial class ReadingListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212110608_PrioNumber")]
+    partial class PrioNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

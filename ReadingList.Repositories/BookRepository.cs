@@ -120,7 +120,32 @@ namespace ReadingList.Repositories
             await _dbContext.SaveChangesAsync();
             return response;
         }
-        public async Task<ServerResponse<Book>> ChangeBookPriorityAsync(string name, Priority newPriority)
+        
+        public async Task<ServerResponse<Book>> MoveDownBookPriorityAsync(string name)
+        {
+            var response = new ServerResponse<Book>();
+            var result = await _dbContext.Books.FirstOrDefaultAsync(r => r.Name == name);
+            
+            if (result == null)
+            {
+                response.Success = false;
+                return response;
+            }
+            else
+            {
+                int resultId = result.PriorityNumber;
+                var resultNeighbor = await _dbContext.Books.FirstOrDefaultAsync(n => n.PriorityNumber == resultId + 1);
+                if (resultNeighbor != null)
+                {
+                    result.PriorityNumber++;
+                    resultNeighbor.PriorityNumber--;
+                }
+                response.Success = true;
+            }
+            await _dbContext.SaveChangesAsync();
+            return response;
+        }
+        public async Task<ServerResponse<Book>> MoveUpBookPriorityAsync(string name)
         {
             var response = new ServerResponse<Book>();
             var result = await _dbContext.Books.FirstOrDefaultAsync(r => r.Name == name);
@@ -131,9 +156,15 @@ namespace ReadingList.Repositories
             }
             else
             {
+                int resultId = result.PriorityNumber;
+                var resultNeighbor = await _dbContext.Books.FirstOrDefaultAsync(n => n.PriorityNumber == resultId - 1);
+                if (resultNeighbor != null)
+                {
+                    result.PriorityNumber--;
+                    resultNeighbor.PriorityNumber++;
+                }
                 response.Success = true;
             }
-            result.Priority = newPriority;
             await _dbContext.SaveChangesAsync();
             return response;
         }
