@@ -48,11 +48,11 @@ Service is responsible for operations on data and passing them between repositor
 
 ## Patterns/Technologies:
 
--ASP.NET Core
--Entity Framework
--Repository Pattern
--Fluent Validation
--AutoMapper
+- ASP.NET Core
+- Entity Framework
+- Repository Pattern
+- Fluent Validation
+- AutoMapper
 
 ## Client
 
