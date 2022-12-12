@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const urlServer = 'https://localhost:7138/api/';
 const Create = () => {
@@ -10,65 +10,56 @@ const Create = () => {
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const priority = parseInt(priorityString);
 
-    const book = { name , imgUrl , finished , priority };
-    setIsPending(true)
+    const book = { name, imgUrl, finished, priority };
+    setIsPending(true);
 
-    fetch(urlServer+'PostBook/', {
+    fetch(urlServer + 'PostBook/', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(book)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(book),
     }).then(() => {
       setIsPending(false);
       navigate('/');
-    })
-  }
+    });
+  };
 
   return (
     <div className="create">
       <h2>Add a New Book</h2>
       <form onSubmit={handleSubmit}>
         <label>Book name:</label>
-        <input 
-          type="text" 
-          required 
+        <input
+          type="text"
+          required
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <label>Book Priority:</label>
-        <select type="number" 
-        required
-        value={priorityString}
-        onChange={(e) => setPriorityString(e.target.value)}>
-        <option value="0">For Now</option>
-        <option value="1">Maybe</option>
-        <option value="2">Later</option>
-          </select>
         <label>Book Finished:</label>
         <input
-          className='checkbox' 
+          className="checkbox"
           type="checkbox"
           value={finished}
-          onChange={(e) => setFinished(e.target.checked)}
-        ></input>
+          onChange={(e) => setFinished(e.target.checked)}></input>
         <label>Book Image Url:</label>
-        <input 
-          type="text" 
+        <input
+          type="text"
           value={imgUrl}
           onChange={(e) => setImgUrl(e.target.value)}
         />
-          
-        {!isPending ? <button>Add Book</button> : 
-        <button disabled>Adding Book</button>}
+
+        {!isPending ? (
+          <button>Add Book</button>
+        ) : (
+          <button disabled>Adding Book</button>
+        )}
       </form>
     </div>
   );
-}
+};
 
-export default Create
+export default Create;

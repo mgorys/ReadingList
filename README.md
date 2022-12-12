@@ -1,7 +1,7 @@
 # ReadingList
 
 ReadingList is an application, on which you can make your list of books, you want to store.
-You can mark each if it is read or set a priority to read.
+That list can be reorganized by changing its place in line or mark if it has been read.
 
 ## Installation
 
@@ -46,9 +46,17 @@ Repository-Service pattern divides the business layer into two semi-layers. Repo
 
 Service is responsible for operations on data and passing them between repository and controller.
 
+## Patterns/Technologies:
+
+-ASP.NET Core
+-Entity Framework
+-Repository Pattern
+-Fluent Validation
+-AutoMapper
+
 ## Client
 
-Client ui is created in React.
+User interface is created with usage of React, a JavaScript library.
 
 ## About
 

@@ -3,7 +3,7 @@
 /* base styles */
 * {
   margin: 0;
-  font-family: "Quicksand";
+  font-family: 'Quicksand';
   color: #333;
 }
 .navbar {
@@ -29,19 +29,23 @@
   color: #3554f1;
 }
 .content {
-  max-width: 600px;
+  min-width: 620px;
+  max-width: 700px;
   margin: 40px auto;
   padding: 20px;
 }
 
 /* book previews / list */
 .book-preview {
+  min-width: 500px;
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
+  display: grid;
+  grid-template-columns: 200px auto 50px;
 }
 .book-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
 .book-preview h2 {
   font-size: 20px;
@@ -51,15 +55,15 @@
 .book-preview a {
   text-decoration: none;
 }
-.book-details h2{
+.book-details h2 {
   font-size: 20px;
   color: #3554f1;
   margin-bottom: 10px;
 }
-.book-details div{
+.book-details div {
   margin: 20px 0;
 }
-.book-details button{
+.book-details button {
   background: #3554f1;
   color: white;
   border: 0;
@@ -105,7 +109,28 @@
   cursor: pointer;
 }
 .checkbox {
-  margin-left: 5px;
+  margin-left: 15px;
+  margin-bottom: -10px;
   height: 20px;
   width: 20px;
+}
+.btn {
+  margin: 5px;
+}
+.imgContainer {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+}
+.imgDetails {
+  height: 500px;
+  width: 350px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 400px auto;
+}
+.detailsContainer {
+  width: fit-content;
 }

@@ -63,6 +63,12 @@ namespace ReadingList.Repositories
             }
             else
             {
+                var booksArray = await _dbContext.Books.ToArrayAsync();
+                foreach (var item in booksArray)
+                {
+                    item.PriorityNumber++;
+                    book.PriorityNumber = 1;
+                }
                 response.Success = true;
             }
             await _dbContext.Books.AddAsync(book);
@@ -80,6 +86,12 @@ namespace ReadingList.Repositories
             }
             else
             {
+                var booksArray = await _dbContext.Books.ToArrayAsync();
+                foreach (var item in booksArray)
+                {
+                    if (item.PriorityNumber > book.PriorityNumber)
+                        item.PriorityNumber--;
+                }
                 response.Success = true;
             }
             _dbContext.Books.Remove(book);
