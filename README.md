@@ -1,7 +1,9 @@
 # ReadingList
 
-ReadingList is an application, on which you can make your list of books, you want to store.
-That list can be reorganized by changing its place in line or mark if it has been read.
+ReadingList is an application, on which you can make your list of books. Every book shows its title, if its read and book cover, taken from web.
+Images can be changed by uploading new path from web.
+You can create your line of books with its own priority place. That line can be reorganized by simple button functions.
+In addition, you can mark book as read.
 
 ## Installation
 
