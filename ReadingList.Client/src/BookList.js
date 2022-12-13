@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
-const urlServer = 'https://localhost:7138/api/';
 const defaultImg =
   'https://demo.publishr.cloud/assets/common/images/edition_placeholder.png';
 const BookList = ({ books, isPending, handleChangePriorityNumber }) => {
