@@ -60,7 +60,7 @@ User interface is created with usage of React, a JavaScript library.
 
 Client sends requests on port: 7138 by default. You should check if it is proper path for your needs.
 
-`https://localhost:7138/api/`
+`const urlServer = 'https://localhost:7138/api/';`
 
 ## Instalation
 
