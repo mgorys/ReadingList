@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const urlServer = 'https://localhost:7138/api/';
 const Create = () => {
   const [name, setName] = useState('');
-  const [priorityString, setPriorityString] = useState(0);
   const [finished, setFinished] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
   const [isPending, setIsPending] = useState(false);
@@ -13,9 +12,7 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const priority = parseInt(priorityString);
-
-    const book = { name, imgUrl, finished, priority };
+    const book = { name, imgUrl, finished };
     setIsPending(true);
 
     fetch(urlServer + 'PostBook/', {

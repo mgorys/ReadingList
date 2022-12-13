@@ -4,7 +4,6 @@ import useFetch from './useFetch';
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { render } from '@testing-library/react';
 
 const urlServer = 'https://localhost:7138/api/';
 const defaultImg =
@@ -19,18 +18,7 @@ const BookDetails = () => {
     isPending,
   } = useFetch(urlServer + 'GetBookBy/' + name);
 
-  useEffect(() => {
-    if (bookDetails.dataFromServer !== undefined && !isPending) {
-      document.getElementById('checkboxFinished').checked =
-        bookDetails.dataFromServer.finished;
-    }
-  }, []);
-
-  const handleTick = (e) => {
-    setFinished(e.target.checked);
-    handleChangeFinished();
-  };
-  const handleUpdateImg = async () => {
+  const handleUpdateImg = async (e) => {
     const updateImgValue = document.getElementById('inputUpdateImg').value;
     await fetch(urlServer + 'UpdateBookImg/' + name, {
       method: 'PUT',
@@ -38,16 +26,22 @@ const BookDetails = () => {
       body: JSON.stringify(updateImgValue),
     });
   };
-  const handleChangeFinished = async () => {
+
+  const handleChangeFinished = async (e) => {
     const checkboxFinished =
       document.getElementById('checkboxFinished').checked;
+    console.log(checkboxFinished);
     await fetch(urlServer + 'ChangeBookFinished/' + name, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(checkboxFinished),
     });
+    setFinished(checkboxFinished);
+    console.log(finished);
   };
+
   const navigate = useNavigate();
+
   const handleDelete = () => {
     fetch(urlServer + 'DeleteBook/' + name, {
       method: 'DELETE',
@@ -82,7 +76,7 @@ const BookDetails = () => {
                     id="checkboxFinished"
                     type="checkbox"
                     checked={finished}
-                    onChange={(e) => handleTick(e)}></input>
+                    onChange={(e) => handleChangeFinished(e)}></input>
                 </h2>
                 <h2>
                   Do you want to change image Url?
